@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Simple</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-red-100 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-200 p-6 rounded-lg shadow-md w-200">
+        <div class="mb-4">
+            <input type="text" id="result" class="w-full px-3 py-2 border rounded text-right text-2xl" value="0" readonly>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <!-- Les boutons de la calculatrice -->
+          <button class="bg-gray-300 hover:bg-gray-500 py-4 rounded" onclick="clearResult()">C</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('/')">/</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('*')">*</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('-')">-</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('7')">7</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('8')">8</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('9')">9</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded row-span-2" onclick="appendToResult('+')">+</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('4')">4</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('5')">5</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('6')">6</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('1')">1</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('2')">2</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('3')">3</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded row-span-2" onclick="calculateResult()">=</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded col-span-2" onclick="appendToResult('0')">0</button>
+          <button class="bg-gray-300 hover:bg-gray-500 py-3 rounded" onclick="appendToResult('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        const resultInput = document.getElementById('result');
+
+function appendToResult(value) {
+    if(resultInput.value === '0') {
+        resultInput.value = value;
+    }else{
+        resultInput.value += value;
+    }
+}
+
+function clearResult() {
+    resultInput.value = '';
+}
+
+function calculateResult() {
+    try {
+        resultInput.value = eval(resultInput.value);
+        if (isNaN(resultInput.value) || !isFinite(resultInput.value)) {
+            resultInput.value = "Erreur";
+        }
+    } catch (error) {
+        resultInput.value = "Erreur";
+    }
+}
+
+    </script>
+</body>
+</html>
